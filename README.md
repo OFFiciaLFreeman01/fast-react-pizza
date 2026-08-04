@@ -1,5 +1,7 @@
 # Fast React Pizza Co.
 
+[![CI](https://github.com/OFFiciaLFreeman01/fast-react-pizza/actions/workflows/ci.yml/badge.svg)](https://github.com/OFFiciaLFreeman01/fast-react-pizza/actions/workflows/ci.yml)
+
 A pizza ordering app: React storefront + a real backend I built for it.
 
 ## Where this came from
