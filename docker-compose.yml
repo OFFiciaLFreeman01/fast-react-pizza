@@ -1,0 +1,27 @@
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://pizza:pizza@db:5432/pizza
+      JWT_SECRET: dev-secret-change-me
+      ADMIN_USERNAME: admin
+      # Default password is "admin123" - for local dev only, override in production.
+      ADMIN_PASSWORD_HASH: "$$2b$$12$$a3o2DL/iHBElo.jrgjYHd.SBKCzZl6THHm3gMbAgIUijHV2f4xj9W"
+      CORS_ORIGINS: http://localhost:5173
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: pizza
+      POSTGRES_PASSWORD: pizza
+      POSTGRES_DB: pizza
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pizza"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
